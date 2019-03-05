@@ -24,6 +24,8 @@ dependencies:
   modal_progress_hud: ^0.1.2
   progress_hud: ^1.1.0
   flutter_staggered_grid_view: ^0.2.7
+  material_search: ^0.2.8
+  carousel_slider: ^1.1.0
 
 
 
@@ -52,6 +54,31 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/movie.jpg
+    - assets/pizza.jpg
+    - assets/image2.jpg
+    - assets/image3.jpg
+    - assets/image4.jpg
+   # - assets/image5.jpg
+   # - assets/image6.jpg
+    - assets/image7.jpg
+    - assets/image8.jpg
+    - assets/image9.jpg
+    - assets/image10.jpg
+    - assets/image11.jpg
+    - assets/image12.jpg
+    - assets/image13.jpg
+    - assets/image14.jpg
+   # - assets/image15.jpg
+    - assets/image16.jpg
+    - assets/image17.jpg
+    - assets/image18.jpg
+    - assets/image19.jpg
+    #- assets/image20.jpg
+    - assets/image21.jpg
+    - assets/image22.jpg
+    - assets/image23.jpg
+    - assets/image24.jpg
+    - assets/image25.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

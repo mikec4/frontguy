@@ -11,6 +11,9 @@ import 'dashboard.dart';
 import 'textFields.dart';
 import 'forms.dart';
 import './pages/landingPage.dart';
+import './pages/product.dart';
+import './pages/cardList.dart';
+import './pages/bus.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(
