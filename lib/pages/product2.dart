@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'food.dart';
 
 import 'bus.dart';
+import 'bus2.dart';
 
 class Product2 extends StatelessWidget {
   final Food food;
@@ -24,7 +25,7 @@ class Product2 extends StatelessWidget {
         ),
       ),
     ),
-    Bus(),
+    Bus2(),
     // SliverGrid(
     //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
     //     maxCrossAxisExtent: 200.0,

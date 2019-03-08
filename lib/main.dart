@@ -14,6 +14,10 @@ import './pages/landingPage.dart';
 import './pages/product.dart';
 import './pages/cardList.dart';
 import './pages/bus.dart';
+import './pages/bus2.dart';
+import './pages/buttonList.dart';
+import './pages/bookTicket.dart';
+import './pages/expansionPanel.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(
@@ -63,13 +67,14 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
          
           primarySwatch: Colors.blue,
+          
         ),
        //  initialRoute: '/Login',
        //  routes: {
        //    '/Login':(context)=>Login(),
         //   '/dashboard':(context) => Dashboard()
         // },
-        home:LandingPage(),
+        home:Expansion()
       ),
     );
   }

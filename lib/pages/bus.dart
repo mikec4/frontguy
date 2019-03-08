@@ -11,6 +11,10 @@ class _BusState extends State<Bus> with SingleTickerProviderStateMixin{
   CurvedAnimation curvedAnimation;
   Animation<double> opacity;
 
+  bool _isColorChanged = false;
+  bool _colorChange = false;
+
+
   @override
   void initState() {
     super.initState();
@@ -50,14 +54,19 @@ class _BusState extends State<Bus> with SingleTickerProviderStateMixin{
 
 
 _innerRow(){
-  return Row(
+  return ListView(
+    scrollDirection: Axis.horizontal,
     children: <Widget>[
-    _customPaint(),_customPaint(),
-
+   _customPaint(),_customPaint(),
     ], 
   );
 }
 
+_innerList(){
+  return ListView.builder(
+
+  );
+}
 _outerRow(){
   return Container(
     padding: EdgeInsets.only(left: 10.0,right: 5.0),
@@ -83,19 +92,19 @@ _outerColumn(){
   );
 }
 
-
+ 
 _sliverList(){
   return SliverFixedExtentList(
-
-    itemExtent: 40.0,
+    itemExtent: 50.0,
     delegate: SliverChildListDelegate([
       Padding(padding: EdgeInsets.only(top: 20.0),),
-      _driverSeat(),
+       _driverSeat(),
       _outerRow(),_outerRow(),
       _outerRow(),_outerRow(),
       _outerRow(),_outerRow(),
       _outerRow(),_outerRow(),
       _outerRow(),_outerRow(),
+  
       _backSeats()
       ]),
   );
@@ -128,28 +137,41 @@ _backSeats(){
   );
 }
  
+
  _customPaint(){
    return InkWell(
-     onTap: (){},
-     child: Opacity(
-       opacity: opacity.value,
-       child: Container(
-         width: 77.0,
-         height: 90.0,
-         child: CustomPaint(
-           painter: BoxSeat(),),
-         ),
-     ),
+    
+     onTap: (){
+       setState(() {
+        _isColorChanged = true; 
+       });
+     },
+     child: Container(
+       width: 77.0,
+       height: 90.0,
+       child: CustomPaint(
+         child: MaterialButton(
+           onPressed: (){setState(() {
+          _isColorChanged = true; 
+          _colorChange = true;
+         });
+         },
+         child: Text('Seat'),
+         color: _colorChange? Colors.red:Colors.green,),
+         painter: BoxSeat(),),
+       ),
    );
  }
 }
 
 class BoxSeat extends CustomPainter{
-
+  Color color;
+  bool isColorChanged;
+  BoxSeat({this.isColorChanged =false});
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint();
-    paint.color = Colors.green;
+    paint.color = isColorChanged? Colors.red : Colors.green;
     paint.strokeWidth = 3.0;
     paint.style=PaintingStyle.stroke;
     paint.strokeCap =StrokeCap.round;
