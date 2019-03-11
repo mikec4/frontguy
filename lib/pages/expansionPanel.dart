@@ -9,16 +9,20 @@ class Expansion extends StatefulWidget {
 
 class _ExpansionState extends State<Expansion> {
 
-  List<String> phoneNumber = ['My number','Other number'];
-  List<String> names = ['My name','Other name'];
+  
 
   String myName = "Michael Ntiriniga";
   String myPhoneNumber = '0715165569';
 
-  bool _expand = false;
+  String _myValue;
+  String _phoneValue;
+  String _paymentValue;
+
+
+
   bool _addPhoneTextField = false;
   bool _addNameTextField =false;
-
+  bool _addPaymentTextField = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,9 @@ class _ExpansionState extends State<Expansion> {
       body: Container(
         child:ListView(
           children: <Widget>[
-            _expansionTile1(),
-            _expansionTile2(),
-            _paymentMethods(),
-            _dropDown(),
+            _fillNameDropdown(),
+            _fillPhoneNumberDropDown(),
+            _paymentsDropDown(),
             _nameTextField(),
             _phoneTextField(),
             _addAmountTextField(),
@@ -41,105 +44,134 @@ class _ExpansionState extends State<Expansion> {
     );
   }
  
-  
-  _dropDown(){
-    return Row(
-      children: <Widget>[
-        SizedBox(width: 134.0,),
-        DropDown()
-      ],
-    );
-  }
-  _expansionTile1(){
-    return ExpansionTile(
-      title: Text('Fill names',style:TextStyle(color: Colors.red,fontSize:19.0)),
-      children: names.map((String value)=>
-         ListTile(
-          title: Text(value),
-          
-          onTap: (){
-            if (value == 'My name') {
-            
-            } else {
-               setState(() {
-                _addNameTextField =true; 
-               });
-               debugPrint('Other name clicked');
-             }
-          },
-          )).toList(),
-    );
-  }
-  _expansionTile2(){
-    return ExpansionTile(
-      initiallyExpanded: _expand,
-      onExpansionChanged: (isExpanded){
-        if (isExpanded) {
+   _fillNameDropdown(){
+    return Padding(
+      padding: EdgeInsets.only(top: 10.0),
+      child: DropdownButton(
+        isExpanded: true,
+        value:_myValue ,
+        onChanged: (String newValue){
           setState(() {
-           _expand =isExpanded; 
-           debugPrint('$_expand');
-          });
-        }
-      }, 
-      title: Text('Phone number',style: TextStyle(color: Colors.red,fontSize:19.0),),
-      children: phoneNumber.
-      map((String value)=> ListTile(
-        title: Text(value),
-        onTap: (){
-          if(value == 'My number'){
-            if(_expand){
-              setState(() {
-               _expand = false; 
-              });
+           _myValue =newValue; 
+           if(newValue == 'Other name'){
+                _addNameTextField =true;
 
-              debugPrint('My number Clicked $_expand');
-            }            
-          }else{
-            setState(() {
-              _addPhoneTextField = true; 
-            });
-            debugPrint('Other number clicked');
-          }
-        },)).toList()
+           }
+           if(newValue == 'Own name'){
+             _addNameTextField = false;
+           }
+          });
+        },
+        iconSize: 30.0,
+        hint: Text('Fill names',style: TextStyle(color: Colors.red,fontSize: 19.0),),
+        items: <String>['Own name','Other name']
+        .map((value){
+          return DropdownMenuItem(
+              child: Text(value,style: TextStyle(fontSize: 19.0),),
+              value: value,
+            );
+        }).toList(),
+      ),
+    );
+
+  }
+
+  _fillPhoneNumberDropDown(){
+    return Padding(
+      padding: EdgeInsets.only(top: 10.0),
+      child: DropdownButton(
+        isExpanded: true,
+        hint: Text('Phone number',style:TextStyle(color:Colors.red,fontSize:19.0)),
+        value: _phoneValue,
+        onChanged: (newValue){
+          setState(() {
+           _phoneValue =newValue;
+
+            if (newValue == 'Other number') {
+              _addPhoneTextField = true;
+            } 
+            if(newValue == 'My number'){
+              _addPhoneTextField = false;
+            }
+          });
+        },
+        items: <String>['My number','Other number']
+        .map((value){
+          return DropdownMenuItem(
+            child: Text(value, style: TextStyle(fontSize: 19.0),),
+            value: value,
+          );
+        }).toList(),
+      ),
     );
   }
+  _paymentsDropDown(){
+    return DropdownButton(
+      iconSize: 30.0,
+      isExpanded: true,
+      value: _paymentValue,
+      hint: Text('Choose a payment method',style: TextStyle(color: Colors.red,fontSize: 19.0),),
+      onChanged: (newValue){
+        setState(() {
+         _paymentValue = newValue;
+         _addPaymentTextField = true;
+        });
+      },
+      items: <String>['Vodacom-Mpesa','Tigo- tigopesa','Airtel Money','Halotel - Halopesa']
+      .map((value){
+        return DropdownMenuItem(
+          child: Text(value,style: TextStyle(fontSize: 19.0),),
+          value: value,
+        );
+      }).toList(),
+    );
+  }
+ 
+  
   
   _nameTextField(){
     return !_addNameTextField? Text(" "): Container(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.only(top: 20.0),
       width: 200.0,
-      child:TextFormField(
-        style: TextStyle(fontSize: 17.0),
-        decoration: InputDecoration(hintText: 'Enter names'),
-        ),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Names',style: TextStyle(fontSize: 19.0),),
+          TextFormField(
+            style: TextStyle(fontSize: 19.0),
+            decoration: InputDecoration(),
+            ),
+        ],
+      ),
     );
   }
   _phoneTextField(){
     return !_addPhoneTextField? Text(' '):Container(
-      padding: EdgeInsets.all(20.0),
-      child: TextFormField(
-        style: TextStyle(fontSize: 17.0),
-        keyboardType: TextInputType.numberWithOptions(signed: false),
-        decoration: InputDecoration(hintText: 'Enter phone number'),
+      padding: EdgeInsets.only(top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Phone number',style:TextStyle(fontSize: 19.0)),
+          TextFormField(
+            style: TextStyle(fontSize: 19.0),
+            keyboardType: TextInputType.numberWithOptions(signed: false),
+            decoration: InputDecoration(),
+          ),
+        ],
       ),
     );
   }
-   _paymentMethods(){
-    return Text(
-              '  * Choose payment methods*',
-              style:TextStyle(
-                color: Colors.red,
-                fontSize: 19.0));
-  }
+   
   _addAmountTextField(){
-    return Padding(
-      padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 10.0),
+    return !_addPaymentTextField? Text(' '): Padding(
+      padding: EdgeInsets.only(top: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Amount',style: TextStyle(fontSize: 19.0),),
           TextFormField(
-            keyboardType: TextInputType.numberWithOptions(signed: false),
+            style: TextStyle(fontSize:19.0),
+            keyboardType: TextInputType.number,
 
           ),
         ],
@@ -156,7 +188,7 @@ class _ExpansionState extends State<Expansion> {
                   child: Text(
                     'Cancel',
                     style:TextStyle(
-                      fontSize: 17.0,
+                      fontSize: 19.0,
                       color: Colors.white)),
                   color: Colors.blue,
                 ),
@@ -165,9 +197,9 @@ class _ExpansionState extends State<Expansion> {
                   onPressed: (){},
                   color: Colors.blue,
                   child: Text(
-                    'Done',
+                    'Pay',
                     style:TextStyle(
-                      fontSize: 17.0,
+                      fontSize: 19.0,
                       color: Colors.white
                     )),
                 )

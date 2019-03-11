@@ -18,6 +18,7 @@ import './pages/bus2.dart';
 import './pages/buttonList.dart';
 import './pages/bookTicket.dart';
 import './pages/expansionPanel.dart';
+import './pages/panelDropdown.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(

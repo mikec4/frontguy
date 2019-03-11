@@ -13,27 +13,12 @@ class _TesterAppState extends State<DropDown> {
     return _dropDownButton2();
   }
 
-  _dropDownButton1(){
-    return DropdownButtonFormField<String>(
-        value: _initialValue,
-        hint: Text('Payments'),
-         items: <String>['Mpesa','Tigo Pesa','Airtel Money','HaloPesa','T-pesa'].
-         map<DropdownMenuItem<String>>((String value){
-           return DropdownMenuItem<String>(
-             value: value,
-             child: Text(value,style: TextStyle(fontSize: 17.0),), 
-           );
-         }).toList(),
-         onChanged: (String newValue){
-           setState(() {
-            _initialValue =newValue; 
-           });
-         },
-        );
-  }
+ 
 
   _dropDownButton2(){
     return DropdownButton<String>(
+      iconSize: 30.0,
+      hint: Text('Payments'),
       value: _initialValue,
       onChanged: (String newValue){
         setState(() {
