@@ -16,9 +16,10 @@ import './pages/cardList.dart';
 import './pages/bus.dart';
 import './pages/bus2.dart';
 import './pages/buttonList.dart';
-import './pages/bookTicket.dart';
 import './pages/expansionPanel.dart';
 import './pages/panelDropdown.dart';
+import './payments/fillPayments.dart';
+import './payments/bookTicket.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(
@@ -63,19 +64,20 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
       client: client,
       child: MaterialApp(
+
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-         
           primarySwatch: Colors.blue,
-          
+          fontFamily: 'Roboto'
         ),
+
        //  initialRoute: '/Login',
        //  routes: {
        //    '/Login':(context)=>Login(),
         //   '/dashboard':(context) => Dashboard()
         // },
-        home:Expansion()
+        home:BookTicket()
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'dropDown.dart';
 import 'bookTicket.dart';
 
 class ButtonList extends StatefulWidget {
@@ -42,7 +41,7 @@ class ButtonListState extends State<ButtonList> {
   Widget _button3(){
     return MaterialButton(
       color: Colors.green,
-      onPressed: _dialog,
+      onPressed: (){},
       child: Text('Button 3'),
 
     );
@@ -65,47 +64,7 @@ class ButtonListState extends State<ButtonList> {
       ListTile(title: Text(val,),)).toList(),
     );
   }
-  _dialog(){
-    return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) {
-        return AlertDialog(
-          //contentPadding: EdgeInsets.all(30.0),
-          title:Text('Book Ticket'),
-          content:Container(
-            height: 250.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _expansionTile1(),
-                _expansionTile2(),
-                Text('   Choose payment method',style:TextStyle(color:Colors.red,fontSize:19.0)),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: 40.0,),
-                    DropDown(),
-                  ],
-                )
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            MaterialButton(
-              onPressed: (){},
-              color: Colors.blue,
-              child: Text('Cancel',style:TextStyle(color:Colors.white)),
-            ),
-            MaterialButton(
-              onPressed: (){},
-              child: Text('Pay',style:TextStyle(color:Colors.white)),
-              color: Colors.blue,
-            )
-          ],
-        ); 
-      }
-    );
-  }
+ 
 
  
   _increment1(){
@@ -128,14 +87,11 @@ class ButtonListState extends State<ButtonList> {
     super.initState();
     _isColorChanged1 = false;
     _isColorChanged2 = false;
-    _buttons.add(_button1());
-    _buttons.add(_button2());
   }
 
   @override
   Widget build(BuildContext context) {
     
-    print('${_buttons.length}');
     return Scaffold(
       appBar: AppBar(),
       body: Container(

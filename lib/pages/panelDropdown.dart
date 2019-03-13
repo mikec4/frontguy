@@ -16,14 +16,17 @@ class Item{
 class _PanelDropdownState extends State<PanelDropdown>with SingleTickerProviderStateMixin {
   Animation<double> _animation;
   AnimationController _controller;
+  CurvedAnimation _curvedAnimation;
+
   String _myValue;
 
-  bool _isExpanded = false;
+  bool _addTextField = false;
 
   @override
   void initState() {
     super.initState();
-    _controller =AnimationController(vsync: this,duration: Duration(milliseconds: 1000));
+    _controller =AnimationController(vsync: this,duration: Duration(milliseconds: 5000));
+   // _curvedAnimation =CurvedAnimation(parent: _controller,curve: Curves.fastLinearToSlowEaseIn);
     _animation =Tween(begin: 0.0, end: 1.0).animate(_controller);
     _animation.addListener((){
       setState(() {
@@ -37,8 +40,8 @@ class _PanelDropdownState extends State<PanelDropdown>with SingleTickerProviderS
        if(status ==AnimationStatus.completed){
          _controller.forward();
        }
-       _controller.forward();
     });
+    _controller.forward();
   }
 
   @override
@@ -50,37 +53,25 @@ class _PanelDropdownState extends State<PanelDropdown>with SingleTickerProviderS
   }
   @override
   Widget build(BuildContext context) {
-    
+    String name = "Michael Ntiriniga";
+
     return Scaffold(
       appBar: AppBar(title: Text('Panel Drop down'),),
-      body: Center(
-        child: _dropdown()
-      ),
+      body: SafeArea(
+        
+        child: Column(
+          children: <Widget>[
+            _dropdown(),
+            _transition(),
+            _textField()
+          ],
+        ),
+      )
     );
   }
  
 
-   
-  _expansionTile(){
-    return ExpansionTile(
-    title: Text('Food types'),
-    initiallyExpanded: _isExpanded,
-    onExpansionChanged: (onChange){
-      setState(() {
-       _isExpanded =onChange; 
-      });
-    },
-    children: <String>['Own number','Other number'].
-    map((value) => 
-    ListTile(
-      title: Text(value),
-      onTap: (){
-        setState(() {
-          _isExpanded = !_isExpanded;
-        });
-      },)).toList(),
-    );
-  }
+  
 
  
   _dropdown(){
@@ -93,6 +84,12 @@ class _PanelDropdownState extends State<PanelDropdown>with SingleTickerProviderS
       onChanged: (String newValue){
         setState(() {
          _myValue =newValue; 
+
+         if(newValue == 'Meat'){
+          _addTextField =true;
+         } else {
+           _addTextField = false;
+         }
         });
       },
       items: <String>['Meat','Rice'].
@@ -103,6 +100,31 @@ class _PanelDropdownState extends State<PanelDropdown>with SingleTickerProviderS
         );
       }).toList(),
     );
+  }
+
+ 
+  _transition(){
+    return FadeTransition(
+      alwaysIncludeSemantics: true,
+      opacity: _animation,
+      child: _button()
+      );
+  }
+  _button(){
+    return MaterialButton(
+      onPressed: (){},
+      color: Colors.red,
+      child: Text('Animate'),
+    );
+  }
+  _textField(){
+    return !_addTextField? Text(' '):
+    TextFormField(
+      initialValue: "Michael Ntiriniga",
+      decoration: InputDecoration(
+        hintText: 'Animate now',
+        ),
+      );
   }
 }
 

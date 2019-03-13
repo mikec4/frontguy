@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'dropDown.dart';
 class BookTicket extends StatefulWidget {
   @override
   _BookTicketState createState() => _BookTicketState();
@@ -69,7 +68,6 @@ class _BookTicketState extends State<BookTicket> {
    return  Row(
               children: <Widget>[
                 SizedBox(width: 94.0,),
-                DropDown(),
               ]);
  }
   _bookTicket(){
