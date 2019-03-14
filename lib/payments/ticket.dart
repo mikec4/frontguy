@@ -318,7 +318,8 @@ class _TicketState extends State<Ticket> {
 
 class BoxPainter extends CustomPainter{
   Color color;
-  BoxPainter({this.color})
+  BoxPainter({this.color});
+  
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint();

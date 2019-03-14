@@ -18,7 +18,7 @@ import './pages/bus2.dart';
 import './pages/buttonList.dart';
 import './pages/expansionPanel.dart';
 import './pages/panelDropdown.dart';
-import './payments/fillPayments.dart';
+import 'package:frontguy/payments/fillPayments/fillPayments.dart';
 import './payments/bookTicket.dart';
 
 void main() => runApp(

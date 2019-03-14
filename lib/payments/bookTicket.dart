@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class BookTicket extends StatefulWidget {
- String name;
- String phoneNumber;
+ final String name;
+ final String phoneNumber;
 
  BookTicket({@required this.name,@required this.phoneNumber});
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bookTicket.dart';
-import 'ticket.dart';
+import '../ticket.dart';
 
 class FillPayments extends StatefulWidget {
   @override
@@ -26,25 +25,41 @@ class _FillPaymentsState extends State<FillPayments> {
 
   bool _userTextField =false;
   bool _userPasswordField = false;
+
+  bool _addFillNameText = false;
+  bool _addFillPhoneText = false;
+  bool _addPaymentMethod = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(),
      body: SafeArea(
-        child: Container(
-          child:ListView(
-            children: <Widget>[
-              _fillNameDropdown(),
-              _fillPhoneNumberDropDown(),
-              _paymentsDropDown(),
-              _nameTextField(),
-              _phoneTextField(),
-              _addAmountTextField(),
-              _bookButtons()
-            ],
-          ),
+        child: ListView(
+          padding: EdgeInsets.all(30.0),
+          children: <Widget>[
+            _fillNameText(),
+            _fillNameDropdown(),
+            _fillPhoneText(),
+            _fillPhoneNumberDropDown(),
+            _paymentMethodText(),
+            _paymentsDropDown(),
+            _nameTextField(),
+            _phoneTextField(),
+            _addAmountTextField(),
+            _bookButtons()
+          ],
         ),
       ),
+    );
+  }
+
+  _fillNameText(){
+    return !_addFillNameText? Text(''):
+    Text(
+      'Fill names',
+      style: TextStyle(fontSize: 19.0,color: Colors.red),
     );
   }
 
@@ -56,6 +71,7 @@ class _FillPaymentsState extends State<FillPayments> {
         value:_myValue ,
         onChanged: (String newValue){
           setState(() {
+            _addFillNameText= true;
            _myValue =newValue; 
            if(newValue == 'Other name'){
                 _addNameTextField =true;
@@ -81,6 +97,13 @@ class _FillPaymentsState extends State<FillPayments> {
 
   }
 
+  _fillPhoneText(){
+    return !_addFillPhoneText? Text(''):
+        Text(
+          'Fill Phone number',
+          style: TextStyle(color: Colors.red,fontSize: 19.0),
+        );
+  }
 
  _fillPhoneNumberDropDown(){
     return Padding(
@@ -91,6 +114,7 @@ class _FillPaymentsState extends State<FillPayments> {
         value: _phoneValue,
         onChanged: (newValue){
           setState(() {
+            _addFillPhoneText = true;
            _phoneValue =newValue;
 
             if (newValue == 'Other number') {
@@ -113,6 +137,13 @@ class _FillPaymentsState extends State<FillPayments> {
       ),
     );
   }
+
+  _paymentMethodText(){
+    return !_addPaymentMethod? Text(''):
+        Text('Choose a payment method',
+          style: TextStyle(color: Colors.red,fontSize: 19.0),
+        );
+  }
   _paymentsDropDown(){
     return DropdownButton(
       iconSize: 30.0,
@@ -121,6 +152,7 @@ class _FillPaymentsState extends State<FillPayments> {
       hint: Text('Choose a payment method',style: TextStyle(color: Colors.red,fontSize: 19.0),),
       onChanged: (newValue){
         setState(() {
+          _addPaymentMethod = true;
          _paymentValue = newValue;
          _addPaymentTextField = true;
         });
@@ -218,32 +250,42 @@ class _FillPaymentsState extends State<FillPayments> {
 
    _bookButtons(){
    return  Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: Row(
+     padding: const EdgeInsets.only(top:20.0),
+     child: Wrap(
+       spacing: 20.0,
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.center,
                 children: <Widget>[
-                  SizedBox(width: 190.0,),
-                  MaterialButton(
-                    onPressed: (){},
-                    child: Text(
-                      'Cancel',
-                      style:TextStyle(
-                        fontSize: 19.0,
-                        color: Colors.white)),
-                    color: Colors.blue,
+                 // SizedBox(width: 190.0,),
+                  Container(
+                    width: 130.0,
+                    height: 40.0,
+                    child: MaterialButton(
+                      onPressed: (){},
+                      child: Text(
+                        'Cancel',
+                        style:TextStyle(
+                          fontSize: 19.0,
+                          color: Colors.white)),
+                      color: Colors.blue,
+                    ),
                   ),
-                  SizedBox(width: 20.0,),
-                  MaterialButton(
-                    onPressed: () =>
-                        Navigator.push(context,
-                            MaterialPageRoute(builder:
-                                (context)=> Ticket(name: userName,phoneNumber: userPhoneNumber,) )),
-                    color: Colors.blue,
-                    child: Text(
-                      'Pay',
-                      style:TextStyle(
-                        fontSize: 19.0,
-                        color: Colors.white
-                      )),
+                  Container(
+                    width: 130.0,
+                    height: 40.0,
+                    child: MaterialButton(
+                      onPressed: () =>
+                          Navigator.push(context,
+                              MaterialPageRoute(builder:
+                                  (context)=> Ticket(name: userName,phoneNumber: userPhoneNumber,) )),
+                      color: Colors.blue,
+                      child: Text(
+                        'Pay',
+                        style:TextStyle(
+                          fontSize: 19.0,
+                          color: Colors.white
+                        )),
+                    ),
                   )
                 ],
                 ),
