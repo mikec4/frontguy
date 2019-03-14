@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'boxPainter.dart';
+import 'package:frontguy/boxPainter.dart';
 
 class Bus2 extends StatefulWidget {
   @override

@@ -3,48 +3,81 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class BookTicket extends StatefulWidget {
+ String name;
+ String phoneNumber;
+
+ BookTicket({@required this.name,@required this.phoneNumber});
+
   @override
   _BookTicketState createState() => _BookTicketState();
 }
 
 class _BookTicketState extends State<BookTicket> {
+ 
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: MaterialButton(
-          onPressed: _dialog,
-          child: Text('bookTicket'),
-          color: Colors.red,
-        ),
-      ),
-    );
+    return Container(child: _dialog(),);
+
   }
   _dialog(){
     return showDialog(
       context: context,
       builder: (context){
         return AlertDialog(
-            title: Text('Book Ticket'),
+            title: Text('Book Ticket',style: TextStyle(fontFamily: 'Lato-Bold'),),
             actions: <Widget>[
-              MaterialButton(
-                child: Text('Confirm'),
-                onPressed: (){},
-                color: Colors.greenAccent,
-              )
+              _buttons()
             ],
            titlePadding: EdgeInsets.only(left: 80.0,top: 20.0,bottom: 0.0),
             content: _passengerTicket(),
           );
       }
+   );
+  }
+
+  _buttons(){
+    return Wrap(
+      direction: Axis.horizontal,
+      spacing: 10.0,
+      children: <Widget>[
+        Container(
+          width: 80.0,
+          height: 35.0,
+          child: MaterialButton(
+            textColor: Colors.white,
+            color: Colors.grey,
+            onPressed: (){},
+            child: Text('Ahirisha'),
+            clipBehavior: Clip.antiAlias,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+          ),
+        ),
+        Container(
+          width: 80.0,
+          height: 35.0,
+          child: MaterialButton(
+            textColor: Colors.white,
+            color: Colors.green,
+            onPressed: (){},
+            child: Text('Lipa'),
+            clipBehavior: Clip.antiAlias,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+          ),
+        )
+      ],
     );
   }
- 
  _passengerTicket(){
    return Container(
      height: 172.0,
-     child: Column(
+     child: ListView(
        children: <Widget>[
        _busName(),
        _busRoute(),
@@ -62,44 +95,58 @@ class _BookTicketState extends State<BookTicket> {
  _busName(){
    return Row(
     children: <Widget>[
-      Text('Bus name: ',style: TextStyle(fontSize: 17.0,fontFamily: 'Roboto-Medium'),),
-      Text('Fresta DPA T399')
+      Text('Bus name: ',
+        style: TextStyle(
+            fontSize: 17.0,
+            fontWeight: FontWeight.w800)),
+      Text('Fresta DPA T399',
+        style: TextStyle(
+            fontFamily: 'Lato-Thin'),)
         ,],
         );
  }
  _busRoute(){
    return Row(
      children: <Widget>[
-       Text('Route:',style: TextStyle(fontFamily: 'Roboto-Medium'),),
+       Text('Route:',
+         style: TextStyle(
+             fontWeight: FontWeight.w800,),),
        SizedBox(width: 10.0,),
-       Text('DAR TO MWANZA'),
+       Text('Dar to Mwanza',style: TextStyle(
+           fontFamily: 'Lato-Thin'),),
      ],
    );
  }
  _passengerName(){
    return Row(
      children: <Widget>[
-       Text('Name:',style: TextStyle(fontFamily: 'Roboto-Bold'),),
+       Text('Name:',
+         style: TextStyle(fontWeight: FontWeight.w800),),
        SizedBox(width: 10.0,),
-       Text('MICHAEL NTIRINIGA'),
+       Text(widget.name,
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
  _passengerPhoneNumber(){
    return Row(
      children: <Widget>[
-       Text('Phone number:',style: TextStyle(fontFamily: 'Roboto-Medium'),),
+       Text('Phone number:',
+         style: TextStyle(fontWeight:FontWeight.w800 ),),
        SizedBox(width: 10.0,),
-       Text('0715165569'),
+       Text(widget.phoneNumber,
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
  _passengerSeatNumber(){
    return Row(
      children: <Widget>[
-       Text('Seat No:',style: TextStyle(fontFamily: 'Roboto-Medium'),),
+       Text('Seat No:',
+         style: TextStyle(fontWeight: FontWeight.w800),),
        SizedBox(width: 10.0,),
-       Text('47'),
+       Text('47',
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
@@ -107,9 +154,12 @@ class _BookTicketState extends State<BookTicket> {
  _reportTime(){
    return Row(
      children: <Widget>[
-       Text('Report time:'),
+       Text('Report time:',
+         style: TextStyle(fontWeight: FontWeight.w800),
+       ),
        SizedBox(width: 10.0,),
-       Text('5:30 AM '),
+       Text('5:30 AM ',
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
@@ -117,27 +167,33 @@ class _BookTicketState extends State<BookTicket> {
  _departTime(){
    return Row(
      children: <Widget>[
-       Text('Departure:'),
+       Text('Departure:',
+         style: TextStyle(fontWeight: FontWeight.w800),),
        SizedBox(width: 10.0,),
-       Text('5:50 AM'),
+       Text('5:50 AM',
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
  _busFare(){
    return Row(
      children: <Widget>[
-       Text('Fare(TZS):'),
+       Text('Fare(TZS):',
+         style: TextStyle(fontWeight: FontWeight.w800),),
        SizedBox(width: 10.0,),
-       Text('40,000'),
+       Text('40,000',
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }
  _fareTax(){
    return Row(
      children: <Widget>[
-       Text('VAT 18%:'),
+       Text('VAT (Included 18%):',
+         style: TextStyle(fontWeight: FontWeight.w800),),
        SizedBox(width: 10.0,),
-       Text('3,600'),
+       Text('3,600',
+         style: TextStyle(fontFamily: 'Lato-Thin'),),
      ],
    );
  }

@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 
 class BoxPainter extends CustomPainter{
   Color color;
-  bool isColorChanged;
-  BoxPainter({this.isColorChanged =false});
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint();
-    paint.color = isColorChanged? Colors.red : Colors.green;
+    paint.color = Colors.green;
     paint.strokeWidth = 3.0;
     paint.style=PaintingStyle.stroke;
     paint.strokeCap =StrokeCap.round;
