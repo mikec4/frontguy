@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
+import './Passenger.dart';
 
 
 class Ticket extends StatefulWidget {
- final String name;
- final String phoneNumber;
+// final String name;
+// final String phoneNumber;
+ final Passenger passenger;
 
-
-  Ticket({this.name,this.phoneNumber});
+  Ticket({this.passenger});
 
   @override
   _TicketState createState() => _TicketState();
@@ -236,7 +236,7 @@ class _TicketState extends State<Ticket> {
         Text('Passenger name:',
           style: TextStyle(
               fontFamily: 'Robot-Bold',fontSize: 19.0),),
-        Text(widget.name,
+        Text(widget.passenger.getName,
             style:TextStyle(fontSize: 19.0,fontFamily: 'Roboto-Thin'))
       ],
     );
@@ -250,7 +250,7 @@ class _TicketState extends State<Ticket> {
         Text('Phone number:',
           style: TextStyle(
               fontFamily: 'Robot-Bold',fontSize: 19.0),),
-        Text(widget.phoneNumber,
+        Text(widget.passenger.getPhoneNumber,
             style:TextStyle(fontSize: 19.0,fontFamily: 'Roboto-Thin'))
       ],
     );
@@ -292,7 +292,7 @@ class _TicketState extends State<Ticket> {
         Text('Bus Fare (tshs):',
           style: TextStyle(
               fontFamily: 'Robot-Bold',fontSize: 19.0),),
-        Text('40,000',
+        Text(widget.passenger.getAmount,
             style:TextStyle(fontSize: 19.0,fontFamily: 'Roboto-Thin'))
       ],
     );

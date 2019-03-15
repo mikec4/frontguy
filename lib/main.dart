@@ -20,6 +20,7 @@ import './pages/expansionPanel.dart';
 import './pages/panelDropdown.dart';
 import 'package:frontguy/payments/fillPayments/fillPayments.dart';
 import './payments/bookTicket.dart';
+import './payments/screen.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(
