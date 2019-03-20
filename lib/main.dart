@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:frontguy/form/home.dart';
+import 'package:frontguy/form/phone.dart';
+import 'package:frontguy/form/signUp.dart';
+import 'package:frontguy/mainDashboard/calendarPage.dart';
+import 'package:frontguy/mainDashboard/ground.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'login.dart';
 import 'appModel.dart';
 import 'tester.dart';
 import 'register.dart';
-import 'home.dart';
 import 'dashboard.dart';
 import 'textFields.dart';
 import 'forms.dart';
@@ -21,6 +24,9 @@ import './pages/panelDropdown.dart';
 import 'package:frontguy/payments/fillPayments/fillPayments.dart';
 import './payments/bookTicket.dart';
 import './payments/screen.dart';
+import 'busSeat.dart';
+import './pages/product2.dart';
+import './form/login.dart';
 
 void main() => runApp(
   ScopedModel<AppModel>(
@@ -73,12 +79,13 @@ class MyApp extends StatelessWidget {
           //fontFamily: 'Lato'
         ),
 
-       //  initialRoute: '/Login',
-       //  routes: {
-       //    '/Login':(context)=>Login(),
-        //   '/dashboard':(context) => Dashboard()
-        // },
-        home:FillPayments()
+//         initialRoute: '/landingPage',
+//         routes: {
+//           '/landingPage':(context)=>LandingPage(),
+//           '/product2':(context) => Product2(),
+//           '/fillPayments':(context) => FillPayments()
+//        },
+        home:Ground()
       ),
     );
   }

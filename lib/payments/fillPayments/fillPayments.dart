@@ -5,6 +5,9 @@ import '../Passenger.dart';
 
 
 class FillPayments extends StatefulWidget {
+  final String seatNumber;
+  FillPayments({this.seatNumber});
+
   @override
   _FillPaymentsState createState() => _FillPaymentsState();
 }
@@ -306,12 +309,17 @@ class _FillPaymentsState extends State<FillPayments> {
               }
             },
             onSaved: (value){
-              passenger.setAmount(value);
-              
+                passenger.setAmount(value);
+
             },
             onFieldSubmitted: (value){
-              assert(_formState.currentState.validate());
-              _formState.currentState.save();
+              if(_formState.currentState.validate()){
+                print('${_formState.currentState.validate()}');
+                _formState.currentState.save();
+
+              } else {
+                print('${_formState.currentState.validate()}');
+              }
               //passenger.amount = value;
             },
             style: TextStyle(fontSize:19.0),
@@ -354,17 +362,16 @@ class _FillPaymentsState extends State<FillPayments> {
                       height: 45.0,
                       child: MaterialButton(
                         onPressed: () {
-                          print('Passenger name ${passenger.getName().toString()}');
-
-                          if(passenger.getName.toString() ==null){
-                            setState((){_errorMessage = null;});
-                          }
-                          if(passenger.getPhoneNumber.isEmpty) return "Phone number is required";
-
-                          if(passenger.getAmount.isEmpty) return "Amount is required";
-                          Navigator.push(context,
-                                MaterialPageRoute(builder:
-                                    (context)=> Ticket(passenger: passenger,) ));},
+                          //print('Passenger name ${passenger.getName().toString()}');
+//                          
+                           passenger.setSeatNumber(widget.seatNumber);
+                          if(passenger.getName.toString().isEmpty) return "Name required";
+                          if(passenger.getPhoneNumber.toString().isEmpty) return "Phone number required";
+                          if(passenger.getAmount.toString().isEmpty) return "Amount required";
+                           Navigator.pushAndRemoveUntil(context,
+                               MaterialPageRoute(builder: (context) => Ticket(passenger: passenger,)),
+                                   (route)=> false);
+                        },
                         color: Colors.blue,
                         child: Text(
                           'Pay',

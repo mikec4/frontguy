@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontguy/pages/landingPage.dart';
 import 'food.dart';
 
 import 'bus.dart';
@@ -25,6 +26,7 @@ class Product2 extends StatelessWidget {
         ),
       ),
     ),
+    SliverPadding(padding: EdgeInsets.only(top: 20.0),),
     Bus2(),
     // SliverGrid(
     //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -44,21 +46,21 @@ class Product2 extends StatelessWidget {
     //     childCount: 20,
     //   ),
     // ),
-    SliverFixedExtentList(
-      itemExtent: 50.0,
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Container(
-            alignment: Alignment.center,
-            color: Colors.lightBlue[100 * (index % 9)],
-            child: Text('list item $index'),
-          );
-        },
-      ),
-    ),
-
-    
-  ],
+//    SliverFixedExtentList(
+//      itemExtent: 50.0,
+//      delegate: SliverChildBuilderDelegate(
+//        (BuildContext context, int index) {
+//          return Container(
+//            alignment: Alignment.center,
+//            color: Colors.lightBlue[100 * (index % 9)],
+//            child: Text('list item $index'),
+//          );
+//        },
+//      ),
+//    ),
+//
+//
+ ],
 )
     );
   }

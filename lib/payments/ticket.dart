@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontguy/pages/landingPage.dart';
+import 'package:frontguy/pages/product2.dart';
 import './Passenger.dart';
 
 
@@ -75,7 +77,10 @@ class _TicketState extends State<Ticket> {
       child: CustomPaint(
         painter: new BoxPainter(color: Colors.green),
         child: MaterialButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LandingPage()),
+                    (route)=> false);
+          },
           child: Text('Confirm',
             style: TextStyle(
                 fontSize: 18.0,color: Colors.black),),
@@ -264,7 +269,7 @@ class _TicketState extends State<Ticket> {
         Text('Seat number:',
           style: TextStyle(
               fontFamily: 'Robot-Bold',fontSize: 19.0),),
-        Text('47',
+        Text(widget.passenger.getSeatNumber,
             style:TextStyle(fontSize: 19.0,fontFamily: 'Roboto-Thin'))
       ],
     );

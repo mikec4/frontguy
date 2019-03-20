@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:frontguy/boxPainter.dart';
+import 'package:frontguy/payments/fillPayments/fillPayments.dart';
 
 class Bus2 extends StatefulWidget {
   @override
@@ -9,32 +10,39 @@ class Bus2 extends StatefulWidget {
 
 class _Bus2State extends State<Bus2> {
   bool _isColorChanged=false;
-  int _buttonCount= 0;
 
-  List<Widget> texts = new List<Widget>();
- 
+  String seatNumber = '60';
+
 
   
  
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-       appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, i){
-         return RaisedButton(
-           onPressed: (){
-             setState(() {
-              _isColorChanged = true; 
-             });
-           },
-           color: _isColorChanged==true? Colors.green:Colors.pink,
-         );
-        },
-      ),
+    return _buttonList();
+  }
+
+  _button(){
+    return MaterialButton(
+      animationDuration: Duration(milliseconds: 1000),
+      child: Text('seat $seatNumber'),
+      onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> FillPayments(seatNumber: seatNumber,)));
+
+        setState(() {
+          _isColorChanged = true;
+        });
+      },
+      color: _isColorChanged? Colors.red: Colors.green,
     );
+  }
+
+  _buttonList(){
+    return SliverFixedExtentList(
+        delegate: SliverChildListDelegate(<Widget>[
+          _button()
+        ]),
+        itemExtent: 30.0);
   }
 }
 

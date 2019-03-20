@@ -21,12 +21,40 @@ class _LandingPageState extends State<LandingPage> {
    int imageheight;
    double aspectRatio;
 
+
+   Future<bool> _onBackPressed() {
+     return showDialog(
+         context: context,
+       builder: (context) {
+           return AlertDialog(
+             title: Text('Exit the app'),
+             actions: <Widget>[
+               FlatButton(
+                 color: Colors.white,
+                 child: Text('No', style: TextStyle (color: Colors.blue,fontSize: 19.0),),
+                 onPressed: () => Navigator.pop(context, false),
+               ),
+
+               FlatButton(
+                 color: Colors.white,
+                 child: Text('Yes', style: TextStyle (color: Colors.blue,fontSize: 19.0),),
+                 onPressed: () => Navigator.pop(context, true),
+               ),
+             ],
+           );
+       }
+     );
+   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Landing Page'),),
-      body: _staggeredGrid()
-        
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        appBar: AppBar(title: Text('Landing Page'),),
+        body: _staggeredGrid()
+
+      ),
     );
   }
   
@@ -44,7 +72,8 @@ class _LandingPageState extends State<LandingPage> {
  
   Widget _card(Food food){
    return InkWell(
-     onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>Product2(food: food,))),
+     onTap: (){
+         Navigator.push(context,_pageRoutBuilder(food));},
      child: Card( 
        elevation: 0.0,
        clipBehavior: Clip.hardEdge,
@@ -98,6 +127,28 @@ class _LandingPageState extends State<LandingPage> {
      ),
      ),
    );
+  }
+
+  _pageRoutBuilder(Food food){
+     return PageRouteBuilder(
+       transitionDuration: Duration(milliseconds: 850),
+       pageBuilder: (context,animation,secondAnimation)=> Product2(food: food),
+       transitionsBuilder: (context,Animation<double>animation, secondAnimation,child){
+         return FadeTransition(
+           opacity: Tween(begin: 0.0,end: 1.0)
+               .animate(CurvedAnimation(
+               parent: animation ,
+               curve: Interval(0.0, 0.7, curve: Curves.easeInBack))),
+           child: FadeTransition(
+             opacity: Tween(begin: 0.4,end: 1.0)
+                 .animate(CurvedAnimation(
+                 parent: animation ,
+                 curve: Interval(0.4, 0.87, curve: Curves.easeInBack))),
+             child: child,
+           ),
+         );
+       }
+     );
   }
 
   
